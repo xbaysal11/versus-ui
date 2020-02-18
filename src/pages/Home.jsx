@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+
+import { Banner } from '../components';
 
 export default class Home extends Component {
     render() {
         return (
             <div>
-                Home
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/products">products</NavLink>
-                <NavLink to="/comparison">comparison</NavLink>
+                <Banner />
             </div>
         );
     }
