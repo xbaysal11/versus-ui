@@ -27,14 +27,14 @@ export default class Header extends Component {
                                     Категории
                                 </NavLink>
                             </li>
-                            <li className="navbar__item">
+                            {/* <li className="navbar__item">
                                 <NavLink
                                     to="/comparison"
                                     activeClassName="navbar__item_active"
                                 >
                                     Сравнения
                                 </NavLink>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>
