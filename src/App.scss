@@ -184,6 +184,39 @@ body {
             }
         }
     }
+    .product__card {
+        position: relative;
+        background-color: white;
+        height: 480px;
+        width: 280px;
+        text-align: left;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+        &:hover {
+            box-shadow: 0 0.8px 3.2px rgba(0, 0, 0, 0.035),
+                0 2.1px 8.9px rgba(0, 0, 0, 0.05),
+                0 5.1px 21.4px rgba(0, 0, 0, 0.065),
+                0 17px 71px rgba(0, 0, 0, 0.1);
+        }
+        .product__card-header {
+        }
+        .product__card-body {
+            padding: 1em;
+            .product__card-title {
+                text-transform: uppercase;
+                color: #363636;
+            }
+            .product__card-progress {
+                margin: 1em 0;
+                .product__card-progress-item {
+                    margin: 1em 0;
+                    p {
+                        margin: 0.2em 0;
+                        color: #858585;
+                    }
+                }
+            }
+        }
+    }
 
     .footer {
         background: #000;

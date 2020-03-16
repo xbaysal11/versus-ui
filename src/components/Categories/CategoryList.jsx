@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CategoryCard from './CategoryCard';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 class CategoryList extends Component {
     render() {
         return (
