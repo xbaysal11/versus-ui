@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import CategoryCard from './CategoryCard';
 import { withRouter, Link } from 'react-router-dom';
+
+import axios from 'axios';
+
 class CategoryBlock extends Component {
+    state = {
+        category: [],
+    };
+
+    componentDidMount() {
+        axios.get('http://localhost:8000/api/v1/categories/').then(res => {
+            console.log(res);
+            const category = res.data.results;
+            this.setState({ category });
+        });
+    }
     render() {
         return (
             <div className="category">
@@ -13,26 +27,14 @@ class CategoryBlock extends Component {
                         </h2>
                     </div>
                     <div className="category__list">
-                        <CategoryCard
-                            title="text"
-                            category="url1"
-                            img="http://placehold.it/280x480/"
-                        />
-                        <CategoryCard
-                            title="text"
-                            category="url2"
-                            img="http://placehold.it/280x480/"
-                        />
-                        <CategoryCard
-                            title="text"
-                            category="url3"
-                            img="http://placehold.it/280x480/"
-                        />
-                        <CategoryCard
-                            title="text"
-                            category="url4"
-                            img="http://placehold.it/280x480/"
-                        />
+                        {this.state.category.slice(0, 4).map(category => (
+                            <CategoryCard
+                                key={category.id}
+                                title={category.name}
+                                category={category.name}
+                                img="http://placehold.it/280x480/"
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
