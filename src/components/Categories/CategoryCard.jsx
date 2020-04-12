@@ -6,14 +6,15 @@ import { Link } from 'react-router-dom';
 
 export default class CategoryCard extends Component {
     static propTypes = {
+        id: PT.number.isRequired,
         title: PT.string.isRequired,
         category: PT.string.isRequired,
         img: PT.string.isRequired,
     };
     render() {
-        const { title, category, img } = this.props;
+        const { id, title, category, img } = this.props;
         return (
-            <Link to={`/category/${category}`}>
+            <Link to={`/category/${id}`}>
                 <div
                     className="category__card"
                     style={{

@@ -24,6 +24,7 @@ class CategoryList extends Component {
                             .map(category => (
                                 <CategoryCard
                                     key={category.id}
+                                    id={category.id}
                                     title={category.name}
                                     category={category.name}
                                     img="http://placehold.it/280x480/"

@@ -10,13 +10,12 @@ class ProductsList extends Component {
     };
 
     componentDidMount() {
-        let url = this.props.location.pathname.split('/').pop();
+        let url = this.props.match.params.category_id;
         axios.get('http://localhost:8000/api/v1/categories/').then(res => {
             // console.log(res);
             let category = res.data.results;
-            const products = category.find(item => item.name === url);
+            const products = category.find(item => item.id == url);
             this.setState({ products: products.products });
-            console.log(products.products);
         });
     }
     render() {
