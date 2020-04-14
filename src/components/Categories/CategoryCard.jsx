@@ -8,11 +8,10 @@ export default class CategoryCard extends Component {
     static propTypes = {
         id: PT.number.isRequired,
         title: PT.string.isRequired,
-        category: PT.string.isRequired,
         img: PT.string.isRequired,
     };
     render() {
-        const { id, title, category, img } = this.props;
+        const { id, title, img } = this.props;
         return (
             <Link to={`/category/${id}`}>
                 <div

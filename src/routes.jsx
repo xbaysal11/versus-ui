@@ -7,8 +7,11 @@ const routes = () => (
     <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/categories" component={Categories} />
-        <Route path="/comparison" component={Comparison} />
-        <Route path="/category/:category_id/" component={Products} />
+        <Route exact path="/category/:category_id/" component={Products} />
+        <Route
+            path="/category/:category_id/comparison/:item1_id,:item2_id"
+            component={Comparison}
+        />
         <Route component={Error} />
     </Switch>
 );

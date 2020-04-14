@@ -1,36 +1,107 @@
 import React, { Component } from 'react';
-import ProductCard from './ProductCard';
-import { withRouter } from 'react-router-dom';
-
+import { withRouter, Link } from 'react-router-dom';
 import axios from 'axios';
+import PT from 'prop-types';
+
+import ProductCard from './ProductCard';
 
 class ProductsList extends Component {
-    state = {
-        products: [],
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            products: [],
+            selectedProductID: [],
+            selectedProductName: [],
+        };
+    }
+    static propTypes = {
+        match: PT.any.isRequired,
+        location: PT.any.isRequired,
     };
 
     componentDidMount() {
-        let url = this.props.match.params.category_id;
         axios.get('http://localhost:8000/api/v1/categories/').then(res => {
-            // console.log(res);
             let category = res.data.results;
-            const products = category.find(item => item.id == url);
+            let categoryId = this.props.match.params.category_id;
+            const products = category.find(item => item.id == categoryId);
             this.setState({ products: products.products });
         });
     }
+    setProduct = e => {
+        const selectedProductID = this.state.selectedProductID.slice(0);
+        const selectedProductName = this.state.selectedProductName.slice(0);
+        const indexID = selectedProductID.indexOf(e.target.id);
+        const indexName = selectedProductName.indexOf(e.target.value);
+
+        console.log(`selectedProduct: ${selectedProductName}`);
+
+        e.target.checked && selectedProductID.length < 2
+            ? selectedProductID.push(e.target.id)
+            : selectedProductID.splice(indexID, 0);
+
+        e.target.checked && selectedProductName.length < 2
+            ? selectedProductName.push(e.target.value)
+            : selectedProductName.splice(indexName, 0);
+
+        console.log(`indexOf: ${e.target.value}`);
+        this.setState({
+            selectedProductID,
+            selectedProductName,
+        });
+    };
+    clearSelectedProduct = () => {
+        this.setState({
+            selectedProductID: [],
+            selectedProductName: [],
+        });
+    };
     render() {
+        const { products, selectedProductName, selectedProductID } = this.state;
+
         return (
             <div className="category">
                 <div className="category__body container">
                     <div className="category__list">
-                        {this.state.products.map(product => (
-                            <ProductCard
-                                key={product.id}
-                                title={product.name}
-                                category="url1"
-                                img="http://placehold.it/280x220/"
-                            />
+                        {products.map(product => (
+                            <div key={product.id}>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        className="product_select"
+                                        name={`card-${product.id}`}
+                                        id={product.id}
+                                        value={product.name}
+                                        onChange={this.setProduct}
+                                        checked={selectedProductID.some(
+                                            item => item == product.id
+                                        )}
+                                    />
+                                    <ProductCard
+                                        key={product.id}
+                                        id={product.id}
+                                        title={product.name}
+                                        category="url1"
+                                        img="http://placehold.it/280x220/"
+                                    />
+                                </label>
+                            </div>
                         ))}
+                        {selectedProductName.length === 2 ? (
+                            <div>
+                                <Link
+                                    to={`${this.props.location.pathname}/comparison/${selectedProductID}`}
+                                    style={{ color: '#000', display: '' }}
+                                >
+                                    {selectedProductName.join(' VS ')}
+                                </Link>
+                                <button onClick={this.clearSelectedProduct}>
+                                    Clear
+                                </button>
+                            </div>
+                        ) : (
+                            <div></div>
+                        )}
                     </div>
                 </div>
             </div>

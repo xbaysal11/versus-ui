@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export default class Comparison extends Component {
     render() {
-        return <div>comparison</div>;
+        return (
+            <div>
+                
+            </div>
+        );
     }
 }

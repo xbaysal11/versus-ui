@@ -136,6 +136,7 @@ body {
             }
         }
     }
+   
     .category {
         .category__body {
             padding: 4em 0;
@@ -147,6 +148,7 @@ body {
                 a {
                     margin: 0.8em auto;
                 }
+
                 .category__card {
                     position: relative;
                     background-color: blue;
@@ -198,13 +200,12 @@ body {
                 0 5.1px 21.4px rgba(0, 0, 0, 0.065),
                 0 17px 71px rgba(0, 0, 0, 0.1);
         }
-        .product__card-header {
-        }
         .product__card-body {
             padding: 1em;
             .product__card-title {
                 text-transform: uppercase;
                 color: #363636;
+                height: 80px;
             }
             .product__card-progress {
                 margin: 1em 0;
@@ -245,5 +246,16 @@ body {
                 align-items: flex-end;
             }
         }
+    }
+    .product_select {
+        // appearance: none;
+    }
+    input[type="radio"]:checked + .category {
+        background: #f00;
+        width: 600px;
+    }
+    label{
+        height: 200px;
+        width: 400px;
     }
 }
