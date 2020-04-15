@@ -25,6 +25,7 @@ export default class ProductCard extends Component {
             <div className="product__card">
                 <div className="product__card-header">
                     <img src={img} alt="img" />
+                    <div className="overlay-block"></div>
                 </div>
                 <div className="product__card-body">
                     <div className="product__card-title">

@@ -11,7 +11,6 @@ class CategoryBlock extends Component {
 
     componentDidMount() {
         axios.get('http://localhost:8000/api/v1/categories/').then(res => {
-            console.log(res);
             const category = res.data.results;
             this.setState({ category });
         });

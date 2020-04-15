@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import PT from 'prop-types';
 
 import ProductCard from './ProductCard';
+import CompareWindow from './CompareWindow';
 
 class ProductsList extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             products: [],
             selectedProductID: [],
             selectedProductName: [],
         };
+        this.setProduct = this.setProduct.bind(this);
+        this.clearSelectedProduct = this.clearSelectedProduct.bind(this);
     }
     static propTypes = {
         match: PT.any.isRequired,
@@ -87,18 +89,13 @@ class ProductsList extends Component {
                                 </label>
                             </div>
                         ))}
-                        {selectedProductName.length === 2 ? (
-                            <div>
-                                <Link
-                                    to={`${this.props.location.pathname}/comparison/${selectedProductID}`}
-                                    style={{ color: '#000', display: '' }}
-                                >
-                                    {selectedProductName.join(' VS ')}
-                                </Link>
-                                <button onClick={this.clearSelectedProduct}>
-                                    Clear
-                                </button>
-                            </div>
+                        {selectedProductName.length == 2 ? (
+                            <CompareWindow
+                                product1={selectedProductName[0]}
+                                product2={selectedProductName[1]}
+                                compareLink={`${this.props.location.pathname}/comparison/${selectedProductID}`}
+                                crearFunc={this.clearSelectedProduct}
+                            />
                         ) : (
                             <div></div>
                         )}
