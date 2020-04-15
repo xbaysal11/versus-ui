@@ -27,7 +27,7 @@ class CategoryList extends Component {
                                     id={category.id}
                                     title={category.name}
                                     category={category.name}
-                                    img="http://placehold.it/280x480/"
+                                    img="https://via.placeholder.com/280x480/3C59fFC/FFFFFF/"
                                 />
                             ))
                             .sort()}

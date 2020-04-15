@@ -84,7 +84,7 @@ class ProductsList extends Component {
                                         id={product.id}
                                         title={product.name}
                                         category="url1"
-                                        img="http://placehold.it/280x220/"
+                                        img="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
                                     />
                                 </label>
                             </div>

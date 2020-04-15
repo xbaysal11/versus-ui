@@ -5,7 +5,7 @@ export default class CompareWindow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            height: 0,
+            height: 139,
         };
         this.open = this.open.bind(this);
     }
@@ -17,7 +17,6 @@ export default class CompareWindow extends Component {
             : this.setState({
                   height: 0,
               });
-        console.log('asdfasdf');
     };
     render() {
         const { product1, product2, compareLink, crearFunc } = this.props;
@@ -62,8 +61,8 @@ export default class CompareWindow extends Component {
                             <li>
                                 <div className="ComparisonList__image___nb7tL">
                                     <img
-                                        src="https://images.versus.io/objects/xiaomi-mi-10-pro-5g.front.medium.1582127755973.webp"
-                                        alt="Xiaomi Mi 10 Pro 5G (256GB / 12GB RAM)"
+                                        src="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
+                                        alt={product1}
                                     />
                                 </div>
                                 <span className="ComparisonList__name___m2tlp">
@@ -94,8 +93,8 @@ export default class CompareWindow extends Component {
                             <li>
                                 <div className="ComparisonList__image___nb7tL">
                                     <img
-                                        src="https://images.versus.io/objects/xiaomi-mi-10-pro-5g.front.medium.1582127755973.webp"
-                                        alt="Xiaomi Mi 10 Pro 5G"
+                                        src="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
+                                        alt={product1}
                                     />
                                 </div>
                                 <span className="ComparisonList__name___m2tlp">
