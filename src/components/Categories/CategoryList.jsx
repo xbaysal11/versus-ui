@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-import CategoryCard from './CategoryCard';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
+import { CategoryCard } from '../index';
+
 class CategoryList extends Component {
-    state = {
-        category: [],
-    };
+    constructor(props) {
+        super(props);
+        this.state = { category: [] };
+    }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/v1/categories/').then(res => {
+        axios.get('/categories/').then(res => {
             console.log(res);
             const category = res.data.results;
             this.setState({ category });
         });
     }
+
     render() {
+        const { category } = this.state;
         return (
             <div className="category">
                 <div className="category__body container">
                     <div className="category__list">
-                        {this.state.category
+                        {category
                             .map(category => (
                                 <CategoryCard
                                     key={category.id}

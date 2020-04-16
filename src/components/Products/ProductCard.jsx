@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
-
 import 'react-step-progress-bar/styles.css';
 import { ProgressBar } from 'react-step-progress-bar';
 
 export default class ProductCard extends Component {
-    // state = {
-    //     // products: [],
-    //     checked: 0,
-    // };
-
     static propTypes = {
         title: PT.string.isRequired,
         img: PT.string.isRequired,
     };
-    // onSiteChanged = e => {
-    //     this.setState({
-    //         checked: e.currentTarget.value,
-    //     });
-    // };
     render() {
         const { title, img } = this.props;
         return (

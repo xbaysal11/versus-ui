@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import CategoryCard from './CategoryCard';
 import { withRouter, Link } from 'react-router-dom';
-
 import axios from 'axios';
 
+import { CategoryCard } from '../index';
+
 class CategoryBlock extends Component {
-    state = {
-        category: [],
-    };
+    constructor(props) {
+        super(props);
+        this.state = { category: [] };
+    }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/v1/categories/').then(res => {
+        axios.get('/categories/').then(res => {
             const category = res.data.results;
             this.setState({ category });
         });
     }
+
     render() {
+        const { category } = this.state;
         return (
             <div className="category">
                 <div className="category__body container">
@@ -26,7 +29,7 @@ class CategoryBlock extends Component {
                         </h2>
                     </div>
                     <div className="category__list">
-                        {this.state.category.slice(0, 4).map(category => (
+                        {category.slice(0, 4).map(category => (
                             <CategoryCard
                                 key={category.id}
                                 id={category.id}

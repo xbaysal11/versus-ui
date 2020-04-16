@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Banner, ProductsList } from '../components';
 import axios from 'axios';
+
+import { Banner, ProductsList } from '../components';
+
 export default class Products extends Component {
-    state = {
-        title: '',
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+        };
+    }
 
     componentDidMount() {
         let url = this.props.match.params.category_id;
-        axios.get('http://localhost:8000/api/v1/categories/').then(res => {
+        axios.get('/categories/').then(res => {
             let category = res.data.results;
             const products = category.find(item => item.id == url);
             this.setState({ title: products.name });
@@ -20,7 +25,9 @@ export default class Products extends Component {
             <>
                 <Banner
                     title={title}
-                    description={`Выберите ${title.toString().toLowerCase()} для сравнения.`}
+                    description={`Выберите ${title
+                        .toString()
+                        .toLowerCase()} для сравнения.`}
                 />
                 <ProductsList />
             </>

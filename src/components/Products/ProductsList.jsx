@@ -3,8 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PT from 'prop-types';
 import axios from 'axios';
 
-import ProductCard from './ProductCard';
-import CompareWindow from './CompareWindow';
+import { ProductCard, CompareWindow } from '../index';
 
 class ProductsList extends Component {
     constructor(props) {
@@ -23,7 +22,7 @@ class ProductsList extends Component {
     };
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/v1/categories/').then(res => {
+        axios.get('/categories/').then(res => {
             let category = res.data.results;
             let categoryId = this.props.match.params.category_id;
             const products = category.find(item => item.id == categoryId);
@@ -60,13 +59,12 @@ class ProductsList extends Component {
     };
     render() {
         const { products, selectedProductName, selectedProductID } = this.state;
-
         return (
-            <div className="category">
-                <div className="category__body container">
-                    <div className="category__list">
+            <div className="product">
+                <div className="product__body container">
+                    <div className="product__list">
                         {products.map(product => (
-                            <div key={product.id}>
+                            <div className="product__item" key={product.id}>
                                 <label>
                                     <input
                                         type="radio"
@@ -81,9 +79,7 @@ class ProductsList extends Component {
                                     />
                                     <ProductCard
                                         key={product.id}
-                                        id={product.id}
                                         title={product.name}
-                                        category="url1"
                                         img="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
                                     />
                                 </label>
