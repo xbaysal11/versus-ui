@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 import PT from 'prop-types';
+import axios from 'axios';
 
 import ProductCard from './ProductCard';
 import CompareWindow from './CompareWindow';

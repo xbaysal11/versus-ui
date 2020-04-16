@@ -90,39 +90,84 @@ export default class Comparison extends Component {
             product2Fields,
         } = this.state;
         return (
-            <div>
-                
-                <div
-                    style={{
-                        width: '100%',
-                        display: 'flex',
-                    }}
-                >
-                    <table style={{ width: '100%', display: 'flex' }}>
-                        <tbody
+            <div className="category">
+                <div className="category__body">
+                    <div className="container">
+                        <div
                             style={{
                                 display: 'flex',
-                                flexDirection: 'column',
-                                margin: '0 auto',
+                                justifyContent: 'space-around',
+                                margin: '4em 0',
+                                position: 'relative',
+                                flexBasis: '50%',
                             }}
                         >
-                            {Object.keys(all).map((item, idx) => (
-                                <tr key={idx}>
-                                    <td>{all[item].product1}</td>
-                                    <th>
-                                        {typeof all[item].field !== 'undefined'
-                                            ? all[item].field
-                                                  .toString()
-                                                  .toUpperCase()
-                                            : '0'}
-                                    </th>
-                                    <td>{all[item].product2}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            <div>
+                                <div className="namesContainer">
+                                    <div className="nameContainer">
+                                        <p>{product1.name}</p>
+                                    </div>
+                                    <div className="nameContainer">
+                                        <p>{product2.name}</p>
+                                    </div>
+                                </div>
+                                <div
+                                    className="vsSeparator"
+                                    style={{ left: '50%' }}
+                                >
+                                    <span>vs</span>
+                                </div>
+                                <div className="picturesContainer">
+                                    <div className="pictureContainer">
+                                        <div className="modernImage">
+                                            <img
+                                                src="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
+                                                alt="img"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="pictureContainer">
+                                        <div className="modernImage">
+                                            <img
+                                                src="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
+                                                alt="img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{ background: '#f6f7fb', padding: '2em 0' }}>
+                        <div className="container">
+                            <table style={{ width: '100%', display: 'flex' }}>
+                                <tbody
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        margin: '0 auto',
+                                    }}
+                                >
+                                    {Object.keys(all).map((item, idx) => (
+                                        <tr key={idx}>
+                                            <td style={{ textAlign: 'right'}}>{all[item].product1}</td>
+                                            <th>
+                                                {typeof all[item].field !==
+                                                'undefined'
+                                                    ? all[item].field
+                                                          .toString()
+                                                          .toUpperCase()
+                                                    : '0'}
+                                            </th>
+                                            <td>{all[item].product2}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <CategoryBlock />
                 </div>
-                <CategoryBlock />
             </div>
         );
     }
