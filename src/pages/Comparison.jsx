@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
 
 import { CategoryBlock, CompareBanner, CompareTable } from '../components';
 
@@ -12,8 +13,10 @@ export default class Comparison extends Component {
             fieldsHead: [],
             product1: [],
             product2: [],
+            isLoading: true,
         };
         this.MergeRecursive = this.MergeRecursive.bind(this);
+        this.myRef = React.createRef();
     }
     static propTypes = {
         match: PT.any.isRequired,
@@ -69,24 +72,113 @@ export default class Comparison extends Component {
                 fieldsHead,
                 product1,
                 product2,
+                isLoading: false,
             });
+            this.myRef.current.scrollTo(0, 0);
         });
     }
 
     render() {
-        const { all, product1, product2 } = this.state;
+        const { all, product1, product2, isLoading } = this.state;
         return (
-            <div className="comparison">
+            <div className="comparison" ref={this.myRef}>
                 <div className="comparison__body">
                     <div className="container">
-                        <CompareBanner
-                            product1={product1}
-                            product2={product2}
-                        />
+                        {!isLoading ? (
+                            <CompareBanner
+                                product1={product1}
+                                product2={product2}
+                            />
+                        ) : (
+                            <div className="comparison-banner">
+                                <div>
+                                    <div className="comparison-banner__titles">
+                                        <div className="comparison-banner__title">
+                                            <Skeleton width={480} height={44} />
+                                        </div>
+                                        <div className="comparison-banner__title">
+                                            <Skeleton width={480} height={44} />
+                                        </div>
+                                    </div>
+                                    <div className="comparison-banner__vs">
+                                        <span>vs</span>
+                                    </div>
+                                    <div className="comparison-banner__images">
+                                        <div className="comparison-banner__image">
+                                            <div className="comparison-banner__image-wrapper">
+                                                <Skeleton
+                                                    width={280}
+                                                    height={220}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="comparison-banner__image">
+                                            <div className="comparison-banner__image-wrapper">
+                                                <Skeleton
+                                                    width={280}
+                                                    height={220}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div className="comparison-table">
                         <div className="container">
-                            <CompareTable all={all} />
+                            {!isLoading ? (
+                                <CompareTable all={all} />
+                            ) : (
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td className="text-right">
+                                                <Skeleton width={320} />
+                                            </td>
+                                            <th className="text-center">
+                                                <Skeleton width={120} />
+                                            </th>
+                                            <td className="text-left">
+                                                <Skeleton width={320} />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="text-right">
+                                                <Skeleton width={320} />
+                                            </td>
+                                            <th className="text-center">
+                                                <Skeleton width={120} />
+                                            </th>
+                                            <td className="text-left">
+                                                <Skeleton width={320} />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="text-right">
+                                                <Skeleton width={320} />
+                                            </td>
+                                            <th className="text-center">
+                                                <Skeleton width={120} />
+                                            </th>
+                                            <td className="text-left">
+                                                <Skeleton width={320} />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td className="text-right">
+                                                <Skeleton width={320} />
+                                            </td>
+                                            <th className="text-center">
+                                                <Skeleton width={120} />
+                                            </th>
+                                            <td className="text-left">
+                                                <Skeleton width={320} />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            )}
                         </div>
                     </div>
                     <CategoryBlock />

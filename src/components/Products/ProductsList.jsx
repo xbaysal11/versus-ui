@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PT from 'prop-types';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
 
 import { ProductCard, CompareWindow } from '../index';
 
@@ -12,6 +13,7 @@ class ProductsList extends Component {
             products: [],
             selectedProductID: [],
             selectedProductName: [],
+            isLoading: true,
         };
         this.setProduct = this.setProduct.bind(this);
         this.clearSelectedProduct = this.clearSelectedProduct.bind(this);
@@ -26,7 +28,7 @@ class ProductsList extends Component {
             let category = res.data.results;
             let categoryId = this.props.match.params.category_id;
             const products = category.find(item => item.id == categoryId);
-            this.setState({ products: products.products });
+            this.setState({ products: products.products, isLoading: false });
         });
     }
     setProduct = e => {
@@ -58,33 +60,42 @@ class ProductsList extends Component {
         });
     };
     render() {
-        const { products, selectedProductName, selectedProductID } = this.state;
+        const {
+            products,
+            selectedProductName,
+            selectedProductID,
+            isLoading,
+        } = this.state;
         return (
             <div className="product">
                 <div className="product__body container">
                     <div className="product__list">
-                        {products.map(product => (
-                            <div className="product__item" key={product.id}>
-                                <label>
-                                    <input
-                                        type="radio"
-                                        className="product_select"
-                                        name={`card-${product.id}`}
-                                        id={product.id}
-                                        value={product.name}
-                                        onChange={this.setProduct}
-                                        checked={selectedProductID.some(
-                                            item => item == product.id
-                                        )}
-                                    />
-                                    <ProductCard
-                                        key={product.id}
-                                        title={product.name}
-                                        img="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
-                                    />
-                                </label>
-                            </div>
-                        ))}
+                        {!isLoading ? (
+                            products.map(product => (
+                                <div className="product__item" key={product.id}>
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            className="product_select"
+                                            name={`card-${product.id}`}
+                                            id={product.id}
+                                            value={product.name}
+                                            onChange={this.setProduct}
+                                            checked={selectedProductID.some(
+                                                item => item == product.id
+                                            )}
+                                        />
+                                        <ProductCard
+                                            key={product.id}
+                                            title={product.name}
+                                            img="https://via.placeholder.com/280x220/3C59fFC/FFFFFF/"
+                                        />
+                                    </label>
+                                </div>
+                            ))
+                        ) : (
+                            <Skeleton count={4} width={280} height={520} />
+                        )}
                         {selectedProductName.length == 2 ? (
                             <CompareWindow
                                 product1={selectedProductName[0]}

@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
 
 import { CategoryCard } from '../index';
 
 class CategoryBlock extends Component {
     constructor(props) {
         super(props);
-        this.state = { category: [] };
+        this.state = { category: [], isLoading: true };
     }
 
     componentDidMount() {
         axios.get('/categories/').then(res => {
             const category = res.data.results;
-            this.setState({ category });
+            this.setState({ category, isLoading: false });
         });
     }
 
     render() {
-        const { category } = this.state;
+        const { category, isLoading } = this.state;
         return (
             <div className="category">
                 <div className="category__body container">
@@ -29,15 +30,21 @@ class CategoryBlock extends Component {
                         </h2>
                     </div>
                     <div className="category__list">
-                        {category.slice(0, 4).map(category => (
-                            <CategoryCard
-                                key={category.id}
-                                id={category.id}
-                                title={category.name}
-                                category={category.name}
-                                img="https://via.placeholder.com/280x480/3C59fFC/FFFFFF/"
-                            />
-                        ))}
+                        {!isLoading ? (
+                            category
+                                .slice(0, 4)
+                                .map(category => (
+                                    <CategoryCard
+                                        key={category.id}
+                                        id={category.id}
+                                        title={category.name}
+                                        category={category.name}
+                                        img="https://via.placeholder.com/280x480/3C59fFC/FFFFFF/"
+                                    />
+                                ))
+                        ) : (
+                            <Skeleton count={4} width={280} height={480} />
+                        )}
                     </div>
                 </div>
             </div>
