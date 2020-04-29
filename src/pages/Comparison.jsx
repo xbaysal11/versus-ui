@@ -22,7 +22,7 @@ export default class Comparison extends Component {
         match: PT.any.isRequired,
     };
     MergeRecursive(obj1, obj2) {
-        for (var p in obj2) {
+        for (let p in obj2) {
             try {
                 obj2[p].constructor == Object
                     ? (obj1[p] = this.MergeRecursive(obj1[p], obj2[p]))
@@ -36,17 +36,19 @@ export default class Comparison extends Component {
     }
     componentDidMount() {
         axios.get('/categories/').then(res => {
-            let categoryId = this.props.match.params.category_id;
-            let product1Id = this.props.match.params.item1_id;
-            let product2Id = this.props.match.params.item2_id;
+            let categoryId = Number(this.props.match.params.category_id);
+            let product1Id = Number(this.props.match.params.item1_id);
+            let product2Id = Number(this.props.match.params.item2_id);
 
-            let category = res.data.results.find(item => item.id == categoryId);
+            let category = res.data.results.find(
+                item => item.id === categoryId
+            );
 
             const product1 = category.products.find(
-                item => item.id == product1Id
+                item => item.id === product1Id
             );
             const product2 = category.products.find(
-                item => item.id == product2Id
+                item => item.id === product2Id
             );
             const product1Fields = product1.fields.map(item => item.value);
             const product2Fields = product2.fields.map(item => item.value);

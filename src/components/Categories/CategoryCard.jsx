@@ -14,13 +14,13 @@ export default class CategoryCard extends Component {
     };
     render() {
         const { id, title, img } = this.props;
+        const disabled = id !== 1;
         return (
-            <Link to={`/category/${id}`}>
+            <Link to={!disabled && `/category/${id}`}>
                 <div
-                    className="category__card"
-                    style={{
-                        backgroundImage: `url(${img})`,
-                    }}
+                    className={`category__card ${disabled ? 'grayscale' : ''}`}
+                    style={{ backgroundImage: `url(${img})` }}
+                    title={disabled && 'В процессе разработки 👷 '}
                 >
                     <div className="category__card-body">
                         <div className="category__card-title">

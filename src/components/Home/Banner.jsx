@@ -7,8 +7,8 @@ export default class Banner extends Component {
         this.state = { isLoading: true };
     }
     static propTypes = {
-        title: PT.string.isRequired,
-        description: PT.string,
+        title: PT.oneOfType([PT.string, PT.object]).isRequired,
+        description: PT.oneOfType([PT.string, PT.object]).isRequired,
     };
     componentDidMount() {
         this.setState({ isLoading: false });

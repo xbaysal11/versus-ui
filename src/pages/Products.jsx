@@ -16,7 +16,7 @@ export default class Products extends Component {
         let url = this.props.match.params.category_id;
         axios.get('/categories/').then(res => {
             let category = res.data.results;
-            const products = category.find(item => item.id == url);
+            const products = category.find(item => String(item.id) === url);
             this.setState({ title: products.name });
         });
     }
@@ -24,12 +24,10 @@ export default class Products extends Component {
         const { title } = this.state;
         return (
             <>
-                {title.toString().toLowerCase() ? (
+                {title ? (
                     <Banner
                         title={title}
-                        description={`Выберите ${title
-                            .toString()
-                            .toLowerCase()} для сравнения.`}
+                        description={`Выберите ${title.toLowerCase()} для сравнения.`}
                     />
                 ) : (
                     <Banner
